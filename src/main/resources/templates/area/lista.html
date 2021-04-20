@@ -29,7 +29,7 @@
         <th></th>
     </tr>
     <tr th:each="area, info : ${lisOfAreas}">
-        <td th:text="${info.index}"></td>
+        <td th:text="${info.index+1}"></td>
         <td th:text="${area.getNombrearea()}"></td>
         <td><a class="btn btn-primary" th:href="@{'/area/editar?id='+${area.getIdarea()}}">Editar</a></td>
         <td><a class="btn btn-danger" th:href="@{'/area/borrar?id='+${area.getIdarea()}}">Borrar</a></td>

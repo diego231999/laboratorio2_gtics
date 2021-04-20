@@ -34,7 +34,7 @@ public class UsuarioController {
         return "/usuario/listar";
     }
 
-    @GetMapping("/form")
+    @GetMapping("/agregar")
     public String crearUsuario(Model model){
         List<Area> areaList = areaRepository.findAll();
 
