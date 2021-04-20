@@ -52,7 +52,7 @@ public class ActividadesController {
             model.addAttribute("listaUsuarios", usuarioList);
             return "/actividad/editarActividad";
         } else {
-            return "redirect:/proyecto/editarProyecto?idProyecto="+idProyecto;
+            return "redirect:/proyecto/editarProyecto?id="+idProyecto;
         }
     }
 
