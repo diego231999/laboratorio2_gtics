@@ -22,7 +22,7 @@ public class ProyectosController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @GetMapping("/list")
+    @GetMapping("/listar")
     public String listProyecto(Model model){
         model.addAttribute("listaProyectos", proyectoRepository.findAll());
         return "/proyecto/listaProyectos";
