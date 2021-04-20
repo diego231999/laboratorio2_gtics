@@ -43,7 +43,7 @@ public class ProyectosController {
             attr.addFlashAttribute("msgEdit","Usuario Actualizado Exitosamente");
         }
         proyectoRepository.save(proyecto);
-        return "redirect:/proyecto/list";
+        return "redirect:/proyecto/listar";
     }
 
     @GetMapping("/edit")
@@ -61,7 +61,7 @@ public class ProyectosController {
             proyectoRepository.deleteById(id);
             attr.addFlashAttribute("msgDelete","Usuario borrado exitosamente");
         }
-        return "redirect:/proyecto/list";
+        return "redirect:/proyecto/listar";
     }
 
 }
