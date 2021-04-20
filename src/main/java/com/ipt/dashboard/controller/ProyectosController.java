@@ -54,8 +54,7 @@ public class ProyectosController {
 
     @GetMapping("/edit")
     public String editProyecto(@RequestParam("id") int id,
-                               Model model,
-                               RedirectAttributes attr) {
+                               Model model) {
         Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
         List<Usuario> usuarioList = usuarioRepository.findAll();
         List<Actividades> actividadesList = actividadesRepository.findByIdproyecto(id);

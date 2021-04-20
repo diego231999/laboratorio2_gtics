@@ -48,7 +48,7 @@
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1" for="peso">Peso de la Actividad</label>
-                <input class="form-control" name="peso" id="peso" type="text">
+                <input class="form-control" name="peso" id="peso" value="0.0" type="text">
             </div>
         </div>
         <div class="col-md-8 mb-4">
@@ -62,7 +62,7 @@
 
     </div>
     <div class="form-group mt-4">
-        <a th:href="@{'/proyecto/editar?id='+${idProyecto}}" class="btn btn-danger">Cancelar</a>
+        <a th:href="@{'/proyecto/edit?id='+idproyecto}" class="btn btn-danger">Cancelar</a>
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </form>
