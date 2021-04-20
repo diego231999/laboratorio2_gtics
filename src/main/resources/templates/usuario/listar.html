@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Proyectos</title>
+    <title>Lista de usuarios</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -16,26 +16,29 @@
         <a class="navbar-brand" href="/area/listar">Areas</a>
     </div>
 </nav>
-<h2>Lista de Proyectos</h2>
-<a class="btn btn-success mt-4 mb-4" th:href="@{/proyecto/new}">Nuevo Proyecto</a>
+<h2>Lista de usuarios</h2>
+<a class="btn btn-success mt-4 mb-4" href="/usuario/agregar">Nuevo usuario</a>
+
 <div th:if="${msgSave != null}" th:text="${msgSave}" class="alert alert-success" role="alert"></div>
 <div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
 <div th:if="${msgDelete != null}" th:text="${msgDelete}" class="alert alert-danger" role="alert"></div>
 <table class="table table-sm">
     <tr>
         <th>#</th>
-        <th>Nombre del proyecto</th>
-        <th>Responsable</th>
+        <th>Correo del usuario</th>
+        <th>Nombre del usuario</th>
+        <th>Apellidos del usuario</th>
         <th></th>
         <th></th>
     </tr>
-    <tr th:each="proyecto, info : ${listaProyectos}">
-        <td th:text="${info.index+1}"></td>
-        <td th:text="${proyecto.getNombreProyecto()}"></td>
-        <td th:text="${proyecto.getUsuario_owner()}"></td>
-        <td><a th:href="@{'/proyecto/edit?id='+ ${proyecto.getIdproyecto()}}" class="btn btn-primary">Edit</a></td>
-        <td><a th:href="@{'/proyecto/delete?id='+ ${proyecto.getIdproyecto()}}" class="btn btn-danger">Delete</a></td>
-  </tr>
+    <tr th:each="usuario, vEstado : ${listaDeUsuarios}">
+        <td th:text="${vEstado.index} + 1"></td>
+        <td th:text="${usuario.getCorreo()}"></td>
+        <td th:text="${usuario.getNombres()}"></td>
+        <td th:text="${usuario.getApellidos()}"></td>
+        <td><a class="btn btn-primary" th:href="@{'/usuario/editar?correo=' + ${usuario.getCorreo()}}">Editar</a></td>
+        <td><a class="btn btn-danger" th:href="@{'/usuario/borrar?correo=' + ${usuario.getCorreo()}}">Borrar</a></td>
+    </tr>
 </table>
 </body>
 </html>

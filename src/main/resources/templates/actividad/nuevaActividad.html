@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Actividad</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="/proyecto/listar">Proyectos</a>
+        <a class="navbar-brand" href="/usuario/listar">Usuarios</a>
+        <a class="navbar-brand" href="/area/listar">Areas</a>
+    </div>
+</nav>
+<h2>Nueva Actividad</h2>
+<hr/>
+<form method="post" th:action="@{'/actividades/guardar'}">
+    <div class="form-row">
+
+        <input class="form-control" name="idproyecto" id="idproyecto" th:value="${idProyecto}" type="hidden">
+
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label class="small mb-1" for="nombreactividad">Nombre de la Actividad</label>
+                <input class="form-control" name="nombreactividad" id="nombreactividad" type="text">
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label class="small mb-1" for="descripcion">Descripción de la Actividad</label>
+                <input class="form-control" name="descripcion" id="descripcion" type="text">
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label class="small mb-1" for="usuario_owner">Usuario Responsable</label>
+                <select class="form-control" name="usuario_owner" id="usuario_owner">
+                    <option th:each="usuario : ${listaUsuarios}"
+                            th:value="${usuario.getCorreo()}"
+                            th:text="${usuario.getCorreo()}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label class="small mb-1" for="disabledTextInput">Peso de la Actividad</label>
+                <input class="form-control" name="peso" id="disabledTextInput" value="0.0" type="text">
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label class="small mb-1" for="disabledSelect">Estado</label>
+                <select class="form-control" name="estado" id="disabledSelect">
+                    <option value="False" th:text="|Pendiente|" selected></option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group mt-4">
+        <a th:href="@{'/proyecto/edit?id='+ ${idProyecto}}" class="btn btn-danger">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+</form>
+</body>
+</html>
