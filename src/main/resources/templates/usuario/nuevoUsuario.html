@@ -16,10 +16,10 @@
         <a class="navbar-brand" href="/area/listar">Areas</a>
     </div>
 </nav>
-<h2>Editar Proyecto</h2>
+<h2>Crear Usuario</h2>
 <hr/>
 
-<form method="post" th:action="@{'/usuarios/guardar'}">
+<form method="post" th:action="@{/usuario/guardar}">
     <div class="form-row">
         <div class="col-md-8 mb-4">
             <div class="form-group">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="form-group mt-4">
-            <a th:href="@{'/usuarios/listar'}" class="btn btn-danger">Cancelar</a>
+            <a th:href="@{/usuario/listar}" class="btn btn-danger">Cancelar</a>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
     </div>

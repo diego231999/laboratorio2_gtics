@@ -36,6 +36,7 @@ public class UsuarioController {
 
     @GetMapping("/agregar")
     public String crearUsuario(Model model){
+        model.addAttribute("listaArea",areaRepository.findAll());
         return "/usuario/nuevoUsuario";
     }
 
@@ -56,12 +57,11 @@ public class UsuarioController {
     public String editarUsuarios(@RequestParam("correo") String correo,
                                  Model model){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(correo);
-        List<Area> areaList = areaRepository.findAll();
 
         if(usuarioOptional.isPresent()){
             Usuario usuario = usuarioOptional.get();
             model.addAttribute("usuario",usuario);
-            model.addAttribute("listaArea",areaList);
+            model.addAttribute("listaArea",areaRepository.findAll());
 
             return "/usuario/editarUsuario";
         }else {
@@ -77,6 +77,6 @@ public class UsuarioController {
             usuarioRepository.deleteById(correo);
             attr.addFlashAttribute("msgDelete","Usuario borrado exitosamente");
         }
-        return "redirect:/usuario/lista";
+        return "redirect:/usuario/listar";
     }
 }
