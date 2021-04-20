@@ -23,14 +23,14 @@
     <div class="form-row">
         <div class="col-md-8 mb-4">
             <div class="form-group">
-                <label class="small mb-1">Correo del Usuario</label>
-                <input class="form-control" value="correo" name="correo" type="text">
+                <label class="small mb-1" for="correo">Correo del Usuario</label>
+                <input class="form-control" id="correo" name="correo" type="text">
             </div>
         </div>
         <div class="col-md-8 mb-4">
             <div class="form-group">
-                <label class="small mb-1">Area</label>
-                <select value="idarea" name="idarea" class="form-control">
+                <label class="small mb-1" for="idarea">Area</label>
+                <select id="idarea" name="idarea" class="form-control">
                     <option th:each="area : ${listaArea}"
                             th:value="${area.getIdarea()}"
                             th:text="${area.getNombrearea()}"></option>
@@ -39,14 +39,14 @@
         </div>
         <div class="col-md-8 mb-4">
             <div class="form-group">
-                <label class="small mb-1">Nombres del usuario</label>
-                <input class="form-control" value="nombres" name="nombres" type="text">
+                <label class="small mb-1" for="nombres">Nombres del usuario</label>
+                <input class="form-control" id="nombres" name="nombres" type="text">
             </div>
         </div>
         <div class="col-md-8 mb-4">
             <div class="form-group">
-                <label class="small mb-1">Apellidos del usuario</label>
-                <input class="form-control" value="apellidos" name="apellidos" type="text">
+                <label class="small mb-1" for="apellidos">Apellidos del usuario</label>
+                <input class="form-control" id="apellidos" name="apellidos" type="text">
             </div>
         </div>
         <div class="form-group mt-4">
