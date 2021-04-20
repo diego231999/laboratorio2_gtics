@@ -20,7 +20,7 @@ public class Actividades {
     @Column(nullable = false)
     private String usuario_owner;
     private float peso;
-    private int estado;
+    private boolean estado;
 
     public int getIdactividad() {
         return idactividad;
@@ -70,11 +70,11 @@ public class Actividades {
         this.peso = peso;
     }
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 }

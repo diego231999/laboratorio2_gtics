@@ -18,13 +18,13 @@
 </nav>
 <h2>Nueva Actividad</h2>
 <hr/>
-<form method="post" th:action="@{/actividad/guardar}">
+<form method="post" th:action="@{/actividad/guardar}" th:object="${actividades}">
     <div class="form-row">
 
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1">Nombre de la Actividad</label>
-                <input class="form-control" name="nombreProyecto" id="nombreProyecto" type="text">
+                <input class="form-control" th:field="*{}" type="text">
             </div>
         </div>
         <div class="col-md-8 mb-4">

@@ -29,23 +29,24 @@ public class ProyectosController {
     ActividadesRepository actividadesRepository;
 
     @GetMapping("/listar")
-    public String listProyecto(Model model){
+    public String listProyecto(Model model) {
         model.addAttribute("listaProyectos", proyectoRepository.findAll());
         return "/proyecto/listaProyectos";
     }
+
     @GetMapping("/new")
-    public String createProyecto(Model model){
+    public String createProyecto(Model model) {
         model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         return "/proyecto/nuevoProyecto";
     }
 
     @PostMapping("/save")
     public String saveProyecto(Proyecto proyecto,
-                               RedirectAttributes attr){
-        if(proyecto.getIdproyecto() == 0){
-            attr.addFlashAttribute("msgSave","Proyecto Creado Exitosamente");
-        }else{
-            attr.addFlashAttribute("msgEdit","Proyecto Actualizado Exitosamente");
+                               RedirectAttributes attr) {
+        if (proyecto.getIdproyecto() == 0) {
+            attr.addFlashAttribute("msgSave", "Proyecto Creado Exitosamente");
+        } else {
+            attr.addFlashAttribute("msgEdit", "Proyecto Actualizado Exitosamente");
         }
         proyectoRepository.save(proyecto);
         return "redirect:/proyecto/listar";
@@ -53,28 +54,31 @@ public class ProyectosController {
 
     @GetMapping("/edit")
     public String editProyecto(@RequestParam("id") int id,
-                               Model model){
+                               Model model,
+                               RedirectAttributes attr) {
         Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
         List<Usuario> usuarioList = usuarioRepository.findAll();
-        List<Actividades> actividadesList = actividadesRepository.findAll();
-        if(proyectoOptional.isPresent()){
+        List<Actividades> actividadesList = actividadesRepository.findByIdproyecto(id);
+
+
+        if (proyectoOptional.isPresent()) {
             Proyecto proyecto = proyectoOptional.get();
-            model.addAttribute("proyecto",proyecto);
-            model.addAttribute("listaUsuarios",usuarioList);
-            model.addAttribute("listaActividades",actividadesList);
+            model.addAttribute("proyecto", proyecto);
+            model.addAttribute("listaUsuarios", usuarioList);
+            model.addAttribute("listaActividades", actividadesList);
             return "/proyecto/editarProyecto";
-        }else{
+        } else {
             return "redirect:/proyecto/listar";
         }
     }
 
     @GetMapping("/delete")
     public String deleteProyecto(@RequestParam("id") int id,
-                                 RedirectAttributes attr){
+                                 RedirectAttributes attr) {
         Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
-        if(proyectoOptional.isPresent()){
+        if (proyectoOptional.isPresent()) {
             proyectoRepository.deleteById(id);
-            attr.addFlashAttribute("msgDelete","Proyecto borrado exitosamente");
+            attr.addFlashAttribute("msgDelete", "Proyecto borrado exitosamente");
         }
         return "redirect:/proyecto/listar";
     }
