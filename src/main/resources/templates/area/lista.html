@@ -17,7 +17,10 @@
     </div>
 </nav>
 <h2>Lista de areas</h2>
-<a class="btn btn-primary mt-4 mb-4" href="/proyecto/agregar">Nuevo area</a>
+<a class="btn btn-success" href="/area/crear">Nueva area</a>
+
+<h1 th:if="${msg} != null" th:text="${msg}"></h1>
+
 <table class="table table-sm">
     <tr>
         <th>#</th>
@@ -25,8 +28,11 @@
         <th></th>
         <th></th>
     </tr>
-    <tr th:each="proyecto, info : ${listaProyectos}">
-<!--        TODO -->
+    <tr th:each="area, info : ${lisOfAreas}">
+        <td th:text="${info.index}"></td>
+        <td th:text="${area.getNombrearea()}"></td>
+        <td><a class="btn btn-primary" th:href="@{'/area/editar?id='+${area.getIdarea()}}">Editar</a></td>
+        <td><a class="btn btn-danger" th:href="@{'/area/borrar?id='+${area.getIdarea()}}">Borrar</a></td>
     </tr>
 </table>
 </body>
