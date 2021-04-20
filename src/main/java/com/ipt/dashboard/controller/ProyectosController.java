@@ -38,9 +38,9 @@ public class ProyectosController {
                                RedirectAttributes attr){
 
         if(proyecto.getIdproyecto() == 0){
-            attr.addFlashAttribute("msgSave","Usuario Creado Exitosamente");
+            attr.addFlashAttribute("msgSave","Proyecto Creado Exitosamente");
         }else{
-            attr.addFlashAttribute("msgEdit","Usuario Actualizado Exitosamente");
+            attr.addFlashAttribute("msgEdit","Proyecto Actualizado Exitosamente");
         }
         proyectoRepository.save(proyecto);
         return "redirect:/proyecto/listar";
