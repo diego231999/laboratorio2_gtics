@@ -59,10 +59,10 @@ public class AreaController {
 
     @PostMapping("/guardar")
     public String guardarArea(Area area, RedirectAttributes attributes){
-        areaRepository.save(area);
 
         attributes.addFlashAttribute("msg", "se modifico el area"+area.getNombrearea());
 
+        areaRepository.save(area);
         return "redirect:/area/listar";
     }
 

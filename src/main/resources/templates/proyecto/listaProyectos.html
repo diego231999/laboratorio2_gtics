@@ -11,18 +11,16 @@
 <body class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse">
-        <a class="navbar-brand" href="/proyecto/listar">Proyectos</a>
+        <a class="navbar-brand" href="/proyecto/list">Proyectos</a>
         <a class="navbar-brand" href="/usuario/listar">Usuarios</a>
         <a class="navbar-brand" href="/area/listar">Areas</a>
     </div>
 </nav>
 <h2>Lista de Proyectos</h2>
-
 <a class="btn btn-primary mt-4 mb-4" th:href="@{/proyecto/new}">Nuevo Proyecto</a>
-
 <div th:if="${msgSave != null}" th:text="${msgSave}" class="alert alert-success" role="alert"></div>
-<div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-success" role="alert"></div>
-
+<div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
+<div th:if="${msgDelete != null}" th:text="${msgDelete}" class="alert alert-danger" role="alert"></div>
 <table class="table table-sm">
     <tr>
         <th>#</th>

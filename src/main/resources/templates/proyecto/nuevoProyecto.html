@@ -23,7 +23,7 @@
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1">Nombre del Proyecto</label>
-                <input class="form-control" name="nombreproyecto" id="nombreproyecto" type="text">
+                <input class="form-control" name="nombreProyecto" id="nombreProyecto" type="text">
             </div>
         </div>
         <div class="col-md-8 mb-4">
@@ -32,7 +32,7 @@
                 <select id="usuario_owner" name="usuario_owner" class="form-control">
                     <option th:each="user: ${listaUsuarios}"
                     th:value="${user.getCorreo()}"
-                    th:text="${user.getNombres()+user.getApellidos()}"></option>
+                    th:text="${user.getNombres()+ ' ' +user.getApellidos()}"></option>
 
                 </select>
             </div>
