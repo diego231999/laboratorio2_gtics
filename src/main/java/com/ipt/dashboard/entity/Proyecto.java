@@ -9,7 +9,7 @@ public class Proyecto {
     @Column(name="idproyecto")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idproyecto;
-    @Column(name="nombreProyecto")
+    @Column(name="nombreproyecto")
     private String nombreProyecto;
     @Column(name="usuario_owner", nullable = false)
     private String usuario_owner;

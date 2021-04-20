@@ -18,6 +18,8 @@
 </nav>
 <h2>Lista de Proyectos</h2>
 <a class="btn btn-primary mt-4 mb-4" href="/proyecto/agregar">Nuevo Proyecto</a>
+<div th:if="${msgSave != null}" th:text="${msgSave}" class="alert alert-success" role="alert"></div>
+<div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-success" role="alert"></div>
 <table class="table table-sm">
     <tr>
         <th>#</th>
@@ -27,6 +29,11 @@
         <th></th>
     </tr>
     <tr th:each="proyecto, info : ${listaProyectos}">
+        <td th:text="${info.index+1}"></td>
+        <td th:text="${proyecto.getNombreProyecto()}"></td>
+        <td th:text="${proyecto.getUsuario_owner()}"></td>
+        <td><a th:href="@{'/proyecto/edit?id='+ ${proyecto.getIdproyecto()}}">Edit</a></td>
+        <td><a th:href="@{'/proyecto/delete?id='+ ${proyecto.getIdproyecto()}}">Delete</a></td>
   </tr>
 </table>
 </body>
