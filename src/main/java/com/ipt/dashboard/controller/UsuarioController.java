@@ -1,6 +1,7 @@
 package com.ipt.dashboard.controller;
 
 import com.ipt.dashboard.entity.Usuario;
+import com.ipt.dashboard.repository.AreaRepository;
 import com.ipt.dashboard.repository.UsuarioRepository;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,17 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    AreaRepository areaRepository;
+
     @GetMapping("/listar")
     public String listarUsuarios(Model model){
         List<Usuario> listaDeUsuarios = usuarioRepository.findAll();
         model.addAttribute("listaDeUsuarios", listaDeUsuarios);
         return "/usuario/listar";
     }
+
+
 
     @GetMapping("/editar")
     public String editarUsuarios(@RequestParam("correo") String correo,
@@ -35,6 +41,7 @@ public class UsuarioController {
         if(usuarioOptional.isPresent()){
             Usuario usuario = usuarioOptional.get();
             model.addAttribute("usuario",usuario);
+            model.addAttribute("listaArea",areaRepository.findAll());
             return "/usuario/editarUsuarios";
         }else {
             return "redirect:/usuario/listar";

@@ -30,7 +30,9 @@
             <div class="form-group">
                 <label class="small mb-1">Area</label>
                 <select>
-                    <option th:each=""></option>
+                    <option th:each="area : ${listaArea}"
+                            th:value="${area.getIdarea()}"
+                            th:text="${area.getNombrearea()}"></option>
                 </select>
             </div>
         </div>
