@@ -27,6 +27,11 @@
         <th></th>
     </tr>
     <tr th:each="proyecto, info : ${listaProyectos}">
+        <td th:text="${info.index+1}"></td>
+        <td th:text="${proyecto.getNombreProyecto()}"></td>
+        <td th:text="${proyecto.getUsuario_owner()}"></td>
+        <td><a th:href="@{'/proyecto/edit?id='+ ${proyecto.getIdproyecto()}}">Edit</a></td>
+        <td><a th:href="@{'/proyecto/delete?id='+ ${proyecto.getIdproyecto()}}">Delete</a></td>
   </tr>
 </table>
 </body>
