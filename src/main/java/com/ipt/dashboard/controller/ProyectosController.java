@@ -55,15 +55,21 @@ public class ProyectosController {
 
     @GetMapping("/edit")
     public String editProyecto(@RequestParam("id") int id,
-                               Model model) {
+                               Model model,
+                               RedirectAttributes attr) {
 
+        double sumaPesos = 0;
+        double sumaPesosTotal = 0;
 
         Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
         List<Usuario> usuarioList = usuarioRepository.findAll();
         List<Actividades> actividadesList = actividadesRepository.findByIdproyecto(id);
-        double sumaPesos = actividadesRepository.sumaPesos(id);
-        double sumaPesosTotal = actividadesRepository.sumaPesosTotal(id);
-
+        try {
+            sumaPesos = actividadesRepository.sumaPesos(id);
+            sumaPesosTotal = actividadesRepository.sumaPesosTotal(id);
+        }catch (AopInvocationException e){
+            System.out.println("ERROR");
+        }
 
         if (proyectoOptional.isPresent()) {
             Proyecto proyecto = proyectoOptional.get();
