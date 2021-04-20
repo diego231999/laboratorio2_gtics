@@ -19,7 +19,9 @@
 <h2>Lista de areas</h2>
 <a class="btn btn-success" href="/area/crear">Nueva area</a>
 
-<h1 th:if="${msg} != null" th:text="${msg}"></h1>
+<div th:if="${msgSave != null}" th:text="${msgSave}" class="alert alert-success" role="alert"></div>
+<div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
+<div th:if="${msgDelete != null}" th:text="${msgDelete}" class="alert alert-danger" role="alert"></div>
 
 <table class="table table-sm">
     <tr>
