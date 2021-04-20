@@ -35,7 +35,10 @@ public class UsuarioController {
     }
 
     @GetMapping("/form")
-    public String crearUsuario(){
+    public String crearUsuario(Model model){
+        List<Area> areaList = areaRepository.findAll();
+
+        model.addAttribute("listaArea",areaList);
         return "/usuario/nuevoUsuario";
     }
 
@@ -56,11 +59,9 @@ public class UsuarioController {
     public String editarUsuarios(@RequestParam("correo") String correo,
                                  Model model){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(correo);
-        List<Area> areaList = areaRepository.findAll();
         if(usuarioOptional.isPresent()){
             Usuario usuario = usuarioOptional.get();
             model.addAttribute("usuario",usuario);
-            model.addAttribute("listaArea",areaList);
             return "/usuario/editarUsuario";
         }else {
             return "redirect:/usuario/listar";

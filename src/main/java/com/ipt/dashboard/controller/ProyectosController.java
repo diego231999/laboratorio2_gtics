@@ -19,7 +19,9 @@ import java.util.Optional;
 public class ProyectosController {
     @Autowired
     ProyectoRepository proyectoRepository;
+    @Autowired
     UsuarioRepository usuarioRepository;
+
     @GetMapping("/list")
     public String listProyecto(Model model){
         model.addAttribute("listaProyectos", proyectoRepository.findAll());
@@ -36,9 +38,9 @@ public class ProyectosController {
                                RedirectAttributes attr){
 
         if(proyecto.getIdproyecto() == 0){
-            attr.addFlashAttribute("msgSave","Usuario Actualizado Exitosamente");
+            attr.addFlashAttribute("msgSave","Usuario Creado Exitosamente");
         }else{
-            attr.addFlashAttribute("msgEdit","Usuario Creado Exitosamente");
+            attr.addFlashAttribute("msgEdit","Usuario Actualizado Exitosamente");
         }
         proyectoRepository.save(proyecto);
         return "redirect:/proyecto/list";
@@ -52,8 +54,14 @@ public class ProyectosController {
     }
 
     @GetMapping("/delete")
-    public String deleteProyecto(){
-        return "";
+    public String deleteProyecto(@RequestParam("id") int id,
+                                 RedirectAttributes attr){
+        Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
+        if(proyectoOptional.isPresent()){
+            proyectoRepository.deleteById(id);
+            attr.addFlashAttribute("msgDelete","Usuario borrado exitosamente");
+        }
+        return "redirect:/proyecto/list";
     }
 
 }
