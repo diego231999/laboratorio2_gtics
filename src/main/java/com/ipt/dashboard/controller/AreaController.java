@@ -60,8 +60,11 @@ public class AreaController {
     @PostMapping("/guardar")
     public String guardarArea(Area area, RedirectAttributes attributes){
 
-        attributes.addFlashAttribute("msg", "se modifico el area"+area.getNombrearea());
-
+        if(area.getIdarea() == 0){
+            attributes.addFlashAttribute("msgSave","Área Creada Exitosamente");
+        }else{
+            attributes.addFlashAttribute("msgEdit","Área Actualizada Exitosamente");
+        }
         areaRepository.save(area);
         return "redirect:/area/listar";
     }
@@ -73,7 +76,7 @@ public class AreaController {
         if(areaOptional.isPresent()){
 
             Area area = areaOptional.get();
-            attributes.addFlashAttribute("msg", "se elimino el area"+area.getNombrearea());
+            attributes.addFlashAttribute("msgDelete","Area borrada exitosamente");
 
             areaRepository.deleteById(id);
         }
