@@ -23,7 +23,7 @@ public class ActividadesController {
    // @GetMapping("/nuevo")
     //public String crearActividad(){
        // return "";
-    }
+    //}
     //@GetMapping("/editar")
     //public String crearActividad(){
       //  return "";
