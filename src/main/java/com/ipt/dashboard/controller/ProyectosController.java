@@ -42,7 +42,6 @@ public class ProyectosController {
     @PostMapping("/save")
     public String saveProyecto(Proyecto proyecto,
                                RedirectAttributes attr){
-
         if(proyecto.getIdproyecto() == 0){
             attr.addFlashAttribute("msgSave","Proyecto Creado Exitosamente");
         }else{

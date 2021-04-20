@@ -6,6 +6,7 @@ import com.ipt.dashboard.repository.ActividadesRepository;
 import com.ipt.dashboard.repository.ProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,8 @@ public class ActividadesController {
     ProyectoRepository proyectoRepository;
 
     @GetMapping("/nuevo")
-    public String nuevoActividad(){
+    public String nuevoActividad(Model model){
+
        return "/actividad/nuevaActividad";
     }
     @GetMapping("/editar")
@@ -33,8 +35,15 @@ public class ActividadesController {
       return "";
     }
     @PostMapping("/guardar")
-    public String guardarActividad(){
-      return "";
+    public String guardarActividad(Actividades actividades,
+                                   RedirectAttributes attr){
+        if(actividades.getIdproyecto() == 0){
+            attr.addFlashAttribute("msgCreate","Actividad Creada Exitosamente");
+        }else{
+            attr.addFlashAttribute("msgEdit","Actividad Actualizada Exitosamente");
+        }
+        actividadesRepository.save(actividades);
+        return "redirect:/proyecto/edit?id="+actividades.getIdproyecto();
     }
 
     @GetMapping("/borrar")
