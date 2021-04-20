@@ -11,9 +11,9 @@ import java.util.List;
 public interface ActividadesRepository extends JpaRepository<Actividades, Integer> {
 
     List<Actividades> findByIdproyecto(int idProyecto);
-    @Query(value="select sum(peso) from actividades where estado = 1 and idproyecto=?1;", nativeQuery = true)
+    @Query(value="select sum(peso) from actividades where estado = '1' and idproyecto=?1", nativeQuery = true)
     double sumaPesos(int idproyecto);
 
-    @Query(value="select sum(peso) from actividades where estado = 1 and idproyecto=?1;", nativeQuery = true)
+    @Query(value="select sum(peso) from actividades where idproyecto=?1", nativeQuery = true)
     double sumaPesosTotal(int idproyecto);
 }

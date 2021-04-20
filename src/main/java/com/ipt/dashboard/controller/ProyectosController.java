@@ -6,6 +6,7 @@ import com.ipt.dashboard.entity.Usuario;
 import com.ipt.dashboard.repository.ActividadesRepository;
 import com.ipt.dashboard.repository.ProyectoRepository;
 import com.ipt.dashboard.repository.UsuarioRepository;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,11 +56,13 @@ public class ProyectosController {
     @GetMapping("/edit")
     public String editProyecto(@RequestParam("id") int id,
                                Model model) {
+
+
         Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
         List<Usuario> usuarioList = usuarioRepository.findAll();
         List<Actividades> actividadesList = actividadesRepository.findByIdproyecto(id);
-        double sumaPesos=actividadesRepository.sumaPesos(id);
-        double sumaPesosTotal=actividadesRepository.sumaPesosTotal(id);
+        double sumaPesos = actividadesRepository.sumaPesos(id);
+        double sumaPesosTotal = actividadesRepository.sumaPesosTotal(id);
 
 
         if (proyectoOptional.isPresent()) {
