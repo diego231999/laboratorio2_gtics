@@ -18,31 +18,53 @@
 </nav>
 <h2>Nueva Actividad</h2>
 <hr/>
-<form method="post" th:action="@{/actividad/guardar}" th:object="${actividades}">
+<form method="post" th:action="@{'/actividades/guardar'}" th:object="${actividades}">
     <div class="form-row">
+
+        <input class="form-control" th:field="*{idactividad}" type="hidden">
+        <input class="form-control" th:field="*{idproyecto}" type="hidden">
 
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1">Nombre de la Actividad</label>
-                <input class="form-control" th:field="*{}" type="text">
+                <input class="form-control" th:field="*{nombreactividad}" type="text">
             </div>
         </div>
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1">Descripción de la Actividad</label>
-                <input class="form-control" name="nombreProyecto" id="nombreProyecto" type="text">
+                <input class="form-control" th:field="*{descripcion}" type="text">
             </div>
         </div>
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1">Usuario Responsable</label>
-                <input class="form-control" name="nombreProyecto" id="nombreProyecto" type="text">
+                <select class="form-control" th:field="*{usuario_owner}">
+                    <option th:each="usuario : ${listaUsuarios}"
+                            th:value="${usuario.getCorreo()}"
+                            th:text="${usuario.getCorreo()}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label class="small mb-1">Peso de la Actividad</label>
+                <input class="form-control" th:field="*{peso}" type="text">
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label class="small mb-1">Estado</label>
+                <select class="form-control" th:field="*{estado}">
+                    <option value="True" th:text="|Finalizado|"></option>
+                    <option value="False" th:text="|Pendiente|"></option>
+                </select>
             </div>
         </div>
 
     </div>
     <div class="form-group mt-4">
-        <a th:href="@{/actividad/listar}" class="btn btn-danger">Cancelar</a>
+        <a th:href="@{'/proyecto/edit?id='+idproyecto}" class="btn btn-danger">Cancelar</a>
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </form>

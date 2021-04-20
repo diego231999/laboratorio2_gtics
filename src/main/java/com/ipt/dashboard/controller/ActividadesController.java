@@ -2,6 +2,7 @@ package com.ipt.dashboard.controller;
 
 import com.ipt.dashboard.entity.Actividades;
 import com.ipt.dashboard.entity.Proyecto;
+import com.ipt.dashboard.entity.Usuario;
 import com.ipt.dashboard.repository.ActividadesRepository;
 import com.ipt.dashboard.repository.ProyectoRepository;
 import com.ipt.dashboard.repository.UsuarioRepository;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.management.StringValueExp;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -39,9 +41,19 @@ public class ActividadesController {
     }
 
     @GetMapping("/editar")
-    public String editarActividad() {
-
-        return "";
+    public String editarActividad(@RequestParam("id") int id, //id de la actividad
+                                  @RequestParam("idProyecto") int idProyecto,
+                                  Model model) {
+        Optional<Actividades> actividadesOptional = actividadesRepository.findById(id);
+        List<Usuario> usuarioList = usuarioRepository.findAll();
+        if (actividadesOptional.isPresent()) {
+            Actividades actividades = actividadesOptional.get();
+            model.addAttribute("actividades", actividades);
+            model.addAttribute("listaUsuarios", usuarioList);
+            return "/actividad/editarActividad";
+        } else {
+            return "redirect:/proyecto/editarProyecto?idProyecto="+idProyecto;
+        }
     }
 
     @PostMapping("/guardar")
@@ -53,7 +65,7 @@ public class ActividadesController {
         if (proyectoOptional.isPresent()) {
             proyecto = proyectoOptional.get();
         }
-        System.out.println(actividades.getIdactividad() + "##################");
+
         if (actividades.getIdactividad() == 0) {
             attr.addFlashAttribute("msgCreatAct", "Actividad Creada Exitosamente");
         } else {
