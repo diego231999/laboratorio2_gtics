@@ -18,10 +18,10 @@ public class ActividadesController {
 
     @GetMapping("/nuevo")
     public String crearActividad(){
-        return "";
+        return "//";
     }
     @GetMapping("/editar")
-    public String crearActividad(){
+    public String editarActividad(){
         return "";
     }
     @PostMapping("/guardar")
