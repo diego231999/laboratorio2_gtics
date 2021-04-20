@@ -33,11 +33,11 @@ public class ProyectosController {
     @PostMapping("/save")
     public String saveProyecto(Proyecto proyecto,
                                RedirectAttributes attr){
-        Optional<Proyecto> proyectoOptional = proyectoRepository.findById(proyecto.getIdproyecto());
-        if(proyectoOptional.isPresent()){
-            attr.addFlashAttribute("msgEdit","Usuario Creado Exitosamente");
-        }else{
+
+        if(proyecto.getIdproyecto() == 0){
             attr.addFlashAttribute("msgSave","Usuario Actualizado Exitosamente");
+        }else{
+            attr.addFlashAttribute("msgEdit","Usuario Creado Exitosamente");
         }
         proyectoRepository.save(proyecto);
         return "redirect:/proyecto/list";

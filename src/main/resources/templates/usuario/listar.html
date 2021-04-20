@@ -18,6 +18,10 @@
 </nav>
 <h2>Lista de usuarios</h2>
 <a class="btn btn-primary mt-4 mb-4" href="/proyecto/agregar">Nuevo usuario</a>
+
+<div th:if="${msgSave != null}" th:text="${msgSave}" class="alert alert-success" role="alert"></div>
+<div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
+<div th:if="${msgDelete != null}" th:text="${msgDelete}" class="alert alert-danger" role="alert"></div>
 <table class="table table-sm">
     <tr>
         <th>#</th>
@@ -32,8 +36,8 @@
         <td th:text="${usuario.getCorreo()}"></td>
         <td th:text="${usuario.getNombres()}"></td>
         <td th:text="${usuario.getApellidos()}"></td>
-        <td>Editar</td>
-        <td>Borrar</td>
+        <td><a class="btn btn-warning" th:href="@{'/usuario/editar?correo=' + ${usuario.getCorreo()}}">Editar</a></td>
+        <td><a class="btn btn-danger" th:href="@{'/usuario/borrar?correo=' + ${usuario.getCorreo()}}">Borrar</a></td>
     </tr>
 </table>
 </body>

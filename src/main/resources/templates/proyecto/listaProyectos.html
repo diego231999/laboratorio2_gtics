@@ -19,7 +19,8 @@
 <h2>Lista de Proyectos</h2>
 <a class="btn btn-primary mt-4 mb-4" href="/proyecto/agregar">Nuevo Proyecto</a>
 <div th:if="${msgSave != null}" th:text="${msgSave}" class="alert alert-success" role="alert"></div>
-<div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-success" role="alert"></div>
+<div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
+<div th:if="${msgDelete != null}" th:text="${msgDelete}" class="alert alert-danger" role="alert"></div>
 <table class="table table-sm">
     <tr>
         <th>#</th>
