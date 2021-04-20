@@ -2,6 +2,7 @@ package com.ipt.dashboard.controller;
 
 import com.ipt.dashboard.entity.Proyecto;
 import com.ipt.dashboard.repository.ProyectoRepository;
+import com.ipt.dashboard.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +19,15 @@ import java.util.Optional;
 public class ProyectosController {
     @Autowired
     ProyectoRepository proyectoRepository;
-
-
+    UsuarioRepository usuarioRepository;
     @GetMapping("/list")
     public String listProyecto(Model model){
         model.addAttribute("listaProyectos", proyectoRepository.findAll());
         return "/proyecto/listaProyectos";
     }
     @GetMapping("/new")
-    public String createProyecto(){
+    public String createProyecto(Model model){
+        model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         return "/proyecto/nuevoProyecto";
     }
 
