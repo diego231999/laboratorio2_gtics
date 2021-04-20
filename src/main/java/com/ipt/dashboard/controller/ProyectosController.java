@@ -58,6 +58,8 @@ public class ProyectosController {
         Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
         List<Usuario> usuarioList = usuarioRepository.findAll();
         List<Actividades> actividadesList = actividadesRepository.findByIdproyecto(id);
+        double sumaPesos=actividadesRepository.sumaPesos(id);
+        double sumaPesosTotal=actividadesRepository.sumaPesosTotal(id);
 
 
         if (proyectoOptional.isPresent()) {
@@ -65,6 +67,8 @@ public class ProyectosController {
             model.addAttribute("proyecto", proyecto);
             model.addAttribute("listaUsuarios", usuarioList);
             model.addAttribute("listaActividades", actividadesList);
+            model.addAttribute("pesoActividades", sumaPesosTotal);
+            model.addAttribute("pesoActividadesFinalizadas", sumaPesos);
             return "/proyecto/editarProyecto";
         } else {
             return "redirect:/proyecto/listar";
