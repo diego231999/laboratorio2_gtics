@@ -29,7 +29,7 @@
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1">Area</label>
-                <select th:field="*{idarea}" class="form-select form-select mb-3">
+                <select th:field="*{idarea}" class="class=form-control">
                     <option th:each="area : ${listaArea}"
                             th:value="${area.getIdarea()}"
                             th:text="${area.getNombrearea()}"></option>
