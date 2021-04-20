@@ -36,9 +36,6 @@ public class UsuarioController {
 
     @GetMapping("/agregar")
     public String crearUsuario(Model model){
-        List<Area> areaList = areaRepository.findAll();
-
-        model.addAttribute("listaArea",areaList);
         return "/usuario/nuevoUsuario";
     }
 
@@ -47,21 +44,25 @@ public class UsuarioController {
                                  RedirectAttributes attr){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getCorreo());
         if(usuarioOptional.isPresent()){
-            attr.addFlashAttribute("msgEdit","Usuario Creado Exitosamente");
+            attr.addFlashAttribute("msgEdit","Usuario Actualizado Exitosamente");
         }else{
-            attr.addFlashAttribute("msgSave","Usuario Actualizado Exitosamente");
+            attr.addFlashAttribute("msgSave","Usuario Creado Exitosamente");
         }
         usuarioRepository.save(usuario);
-        return "redirect:/usuario/crear";
+        return "redirect:/usuario/listar";
     }
 
     @GetMapping("/editar")
     public String editarUsuarios(@RequestParam("correo") String correo,
                                  Model model){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(correo);
+        List<Area> areaList = areaRepository.findAll();
+
         if(usuarioOptional.isPresent()){
             Usuario usuario = usuarioOptional.get();
             model.addAttribute("usuario",usuario);
+            model.addAttribute("listaArea",areaList);
+
             return "/usuario/editarUsuario";
         }else {
             return "redirect:/usuario/listar";

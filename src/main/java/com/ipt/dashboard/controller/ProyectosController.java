@@ -49,7 +49,7 @@ public class ProyectosController {
     @GetMapping("/edit")
     public String editProyecto(@RequestParam("id") int id,
                                Model model){
-
+        proyectoRepository.findById(id);
         return "";
     }
 
@@ -59,7 +59,7 @@ public class ProyectosController {
         Optional<Proyecto> proyectoOptional = proyectoRepository.findById(id);
         if(proyectoOptional.isPresent()){
             proyectoRepository.deleteById(id);
-            attr.addFlashAttribute("msgDelete","Usuario borrado exitosamente");
+            attr.addFlashAttribute("msgDelete","Proyecto borrado exitosamente");
         }
         return "redirect:/proyecto/listar";
     }
