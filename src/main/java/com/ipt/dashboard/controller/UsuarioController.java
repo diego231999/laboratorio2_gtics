@@ -1,5 +1,6 @@
 package com.ipt.dashboard.controller;
 
+import com.ipt.dashboard.entity.Area;
 import com.ipt.dashboard.entity.Usuario;
 import com.ipt.dashboard.repository.AreaRepository;
 import com.ipt.dashboard.repository.UsuarioRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,17 +34,34 @@ public class UsuarioController {
         return "/usuario/listar";
     }
 
+    @GetMapping("/form")
+    public String crearUsuario(){
+        return "/usuario/nuevoUsuario";
+    }
 
+    @PostMapping("/guardar")
+    public String guardarUsuario(Usuario usuario,
+                                 RedirectAttributes attr){
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getCorreo());
+        if(usuarioOptional.isPresent()){
+            attr.addFlashAttribute("msgEdit","Usuario Creado Exitosamente");
+        }else{
+            attr.addFlashAttribute("msgSave","Usuario Actualizado Exitosamente");
+        }
+        usuarioRepository.save(usuario);
+        return "redirect:/usuario/crear";
+    }
 
     @GetMapping("/editar")
     public String editarUsuarios(@RequestParam("correo") String correo,
                                  Model model){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(correo);
+        List<Area> areaList = areaRepository.findAll();
         if(usuarioOptional.isPresent()){
             Usuario usuario = usuarioOptional.get();
             model.addAttribute("usuario",usuario);
-            model.addAttribute("listaArea",areaRepository.findAll());
-            return "/usuario/editarUsuarios";
+            model.addAttribute("listaArea",areaList);
+            return "/usuario/editarUsuario";
         }else {
             return "redirect:/usuario/listar";
         }
