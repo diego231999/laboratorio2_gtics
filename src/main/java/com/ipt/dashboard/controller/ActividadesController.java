@@ -3,6 +3,7 @@ package com.ipt.dashboard.controller;
 import com.ipt.dashboard.entity.Actividades;
 import com.ipt.dashboard.entity.Proyecto;
 import com.ipt.dashboard.repository.ActividadesRepository;
+import com.ipt.dashboard.repository.ProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,28 +21,32 @@ public class ActividadesController {
     @Autowired
     ActividadesRepository actividadesRepository;
 
-   // @GetMapping("/nuevo")
-    //public String crearActividad(){
-       // return "";
-    //}
-    //@GetMapping("/editar")
-    //public String crearActividad(){
-      //  return "";
-    //}
-    //@PostMapping("/guardar")
-    //public String crearActividad(){
-      //  return "";
-    //}
+    @Autowired
+    ProyectoRepository proyectoRepository;
+
+    @GetMapping("/nuevo")
+    public String nuevoActividad(){
+       return "/actividad/nuevaActividad";
+    }
+    @GetMapping("/editar")
+    public String editarActividad(){
+      return "";
+    }
+    @PostMapping("/guardar")
+    public String guardarActividad(){
+      return "";
+    }
 
     @GetMapping("/borrar")
     public String crearActividad(@RequestParam("id") int id,
+                                @RequestParam("idProyecyo") int idProyecto,
                                  RedirectAttributes attr){
         Optional<Actividades> actividadesOptional = actividadesRepository.findById(id);
         if(actividadesOptional.isPresent()){
             actividadesRepository.deleteById(id);
             attr.addFlashAttribute("msgDelete","Actividad borrada exitosamente");
         }
-        return "redirect:/proyecto/edit";
+        return "redirect:/proyecto/edit?id="+idProyecto;
     }
 
 }

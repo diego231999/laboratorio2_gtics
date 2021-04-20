@@ -20,6 +20,7 @@
 <hr/>
 <form method="post" th:action="@{'/proyecto/save'}" th:object="${proyecto}">
     <div class="form-row">
+        <input class="form-control" th:field="*{idproyecto}" type="hidden">
         <div class="col-md-8 mb-4">
             <div class="form-group">
                 <label class="small mb-1">Nombre del Proyecto</label>
@@ -69,8 +70,8 @@
         <td th:text="${actividad.getPeso()}"></td>
         <td th:if="${actividad.getEstado()==1}" th:text="|Finalizado|"></td>
         <td th:if="${actividad.getEstado()==0}" th:text="|Pendiente|"></td>
-        <td><a th:href="@{'/actividades/editar?id='+ ${actividad.getIdactividad()}}" class="btn btn-primary">Editar</a></td>
-        <td><a th:href="@{'/actividades/borrar?id='+ ${actividad.getIdactividad()}}" class="btn btn-danger">Borrar</a></td>
+        <td><a th:href="@{'/actividades/editar?id='+ ${actividad.getIdactividad()}+ '&idProyecto='+${actividad.getIdproyecto()}}" class="btn btn-primary">Editar</a></td>
+        <td><a th:href="@{'/actividades/borrar?id='+ ${actividad.getIdactividad()}+ '&idProyecto='+${actividad.getIdproyecto()}}" class="btn btn-danger">Borrar</a></td>
     </tr>
 </table>
 </body>
