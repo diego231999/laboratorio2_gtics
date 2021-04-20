@@ -64,7 +64,7 @@
 
     </div>
     <div class="form-group mt-4">
-        <a th:href="@{'/proyecto/edit?id='+idproyecto}" class="btn btn-danger">Cancelar</a>
+        <a th:href="@{'/proyecto/edit?id=' + ${actividades.getIdproyecto()}}" class="btn btn-danger">Cancelar</a>
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 </form>
